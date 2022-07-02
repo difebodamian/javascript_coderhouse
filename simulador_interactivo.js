@@ -1,62 +1,81 @@
-let precio_1 = 50;
-let precio_2 = 100;
-let precio_3 = 75;
-let precio_4 = 30;
+// hacer este ejercicio con objetos
+
+class Videojuego {
+    constructor (nombre, genero, precio) {
+        this.nombre = nombre;
+        this.genero = genero;
+        this.precio = precio;
+        this.info = `El nombre del juego es ${this.nombre}, su género es ${this.genero} y su valor es $${this.precio}`
+    }
+}
+
+const juego1 = new Videojuego ("GTA V","Acción",500);
+const juego2 = new Videojuego ("God of War","Aventura",1500);
+const juego3 = new Videojuego ("Fortnite","Battle Royale",0);
+const juego4 = new Videojuego ("Call of Duty","FPS",1000);
+
+let lista = `
+1) Nombre: ${juego1.nombre} \n Género: ${juego1.genero} \n Precio: $${juego1.precio}
+2) Nombre: ${juego2.nombre} \n Género: ${juego1.genero} \n Precio: $${juego2.precio}
+3) Nombre: ${juego3.nombre} \n Género: ${juego1.genero} \n Precio: $${juego3.precio}
+4) Nombre: ${juego4.nombre} \n Género: ${juego1.genero} \n Precio: $${juego4.precio}
+`;
+
+
 let carrito = "";
 let precioCarrito = 0;
 let continuar;
 
-let lista = `Producto 1: $${precio_1}
-Producto 2: $${precio_2}
-Producto 3: $${precio_3}
-Producto 4: $${precio_4}`;
+
 
 function mostrarLista() {
-    let solicitud = parseInt(prompt(`Elije un producto \n` + lista));
+    let solicitud = parseInt(prompt(`Elije un videojuego \n` + lista));
     switch (solicitud) {
         case 1: 
-        alert("Elegiste el producto 1");
-        carrito += "Producto 1, ";
-        precioCarrito += precio_1;
-            break;
+        alert(`Elegiste ${juego1.nombre}`);
+        carrito += juego1.nombre + "\n";
+        precioCarrito += juego1.precio;
+        break;
         case 2: 
-        alert("Elegiste el producto 2");
-        carrito += "Producto 2, ";
-        precioCarrito += precio_2;
+        alert(`Elegiste ${juego2.nombre}`);
+        carrito += juego2.nombre + "\n";
+        precioCarrito += juego2.precio;
         break;
         case 3: 
-        alert("Elegiste el producto 3");
-        carrito += "Producto 3, ";
-        precioCarrito += precio_3;
+        alert(`Elegiste ${juego3.nombre}`);
+        carrito += juego3.nombre + "\n";
+        precioCarrito += juego3.precio;
         break;
         case 4: 
-        alert("Elegiste el producto 4");
-        carrito += "Producto 4, ";
-        precioCarrito += precio_4;
+        alert(`Elegiste ${juego4.nombre}`);
+        carrito += juego4.nombre + "\n";
+        precioCarrito += juego4.precio;
         break;
         default:
-        alert("No seleccionaste ningún producto")
+            alert("No seleccionaste ningún producto")
             break;
-    }
-}
-let i = 0
-while (i < 5) {
-    if (carrito == false) {
-        alert("Puedes elegir un máximo de 5 productos");
-        mostrarLista();
-    } else {
-        continuar = prompt("Quiere seguir comprando? (s/n)");
-        if (continuar == "s") {
-            mostrarLista();
-        } else if (continuar == "n") {
-            alert(`Seleccionó estos productos \n ${carrito}, su valor es ${precioCarrito}`);
-            break;
-        } else {
-            alert("Ingrese una respuesta válida")
         }
     }
-    i++;
-    if (i == 5) {
-        alert(`Seleccionó estos productos \n ${carrito}, su valor es ${precioCarrito}`);
-    }
-} 
+    let i = 0
+    while (i < 5) {
+        if (carrito == false) {
+            alert("Puedes elegir un máximo de 5 juegos");
+            mostrarLista();
+        } else {
+            continuar = prompt("Quiere seguir comprando? (s/n)");
+            if (continuar == "s") {
+                mostrarLista();
+            } else if (continuar == "n") {
+                alert(`Seleccionó estos productos \n ${carrito}Su valor es $${precioCarrito}`);
+                break;
+            } else {
+                alert("Ingrese una respuesta válida")
+            }
+        }
+        i++;
+        if (i == 5) {
+            alert(`Seleccionó estos productos \n ${carrito} Su valor es $${precioCarrito}`);
+        }
+    } 
+    
+    
