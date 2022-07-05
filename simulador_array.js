@@ -8,7 +8,7 @@ class Videojuego {
     this.info = `El nombre del juego es ${this.nombre}, su género es ${this.genero} y su valor es $${this.precio}`;
   }
 }
-
+//Creación de objetos
 const juego1 = new Videojuego("Resident Evil Village", "Terror", 60);
 const juego2 = new Videojuego("GTA V", "Acción - Mundo Abierto", 15);
 const juego3 = new Videojuego("Assassin's Creed Origins", "Acción", 30);
@@ -17,6 +17,15 @@ const juego5 = new Videojuego("Cyberpunk 2077", "Acción", 70);
 
 function agregarVideojuego(name) {
   carrito.push(name);
+}
+
+function mostrarCarrito() {
+  `${carrito.join(`\n`)}`;
+}
+
+function eliminarVideojuego(pos) {
+  pos -= 1;
+  carrito.splice(pos, 1);
 }
 let catalogo = [
   juego1.nombre,
@@ -29,43 +38,47 @@ let catalogo = [
 let carrito = [];
 let continuar = true;
 let agregar;
-
+let consultaEliminar;
+// Un ciclo que se repite siempre que el usuario quiera seguir eligiendo juegos
 while (continuar == true) {
-  agregar = parseInt(
-    prompt(
-      `Ingrese el número del juego que quiere agregar a su carrito \n${catalogo.join(
-        `\n`
-      )}`
-    )
-  );
+  agregar = prompt(`Ingrese la inicial del juego que quiere agregar a su carrito \n${catalogo.join(`\n`)}`);
   switch (agregar) {
-    case 1:
+    case "r":
       agregarVideojuego(juego1.nombre);
       break;
-    case 2:
+    case "g":
       agregarVideojuego(juego2.nombre);
       break;
-    case 3:
+    case "a":
       agregarVideojuego(juego3.nombre);
       break;
-    case 4:
+    case "t":
       agregarVideojuego(juego4.nombre);
       break;
-    case 5:
+    case "c":
       agregarVideojuego(juego5.nombre);
       break;
     default:
       alert("No seleccionaste ningún videojuego");
       break;
   }
-  let consulta_continuar = prompt("Desea agregar otro videojuego? s/n");
-  if (consulta_continuar == "s") {
+  //Condicional para definir si el usuario quiere agregar otro videojuego
+  let consultaContinuar = prompt("Desea agregar otro videojuego? s/n");
+  if (consultaContinuar == "s") {
     continuar = true;
-  } else if (consulta_continuar == "n") {
-    alert(`Su carrito \n${carrito.join(`\n`)}`);
+  } else if (consultaContinuar == "n") {
+    mostrarCarrito();
     break;
   } else {
     alert("Ingresa un valor válido");
   }
 }
-//agregar funcionalidad de eliminar un videojuego del carrito
+// Eliminar un juego del carrito
+consultaEliminar = prompt(`Quiere eliminar un elemento de su carrito? s/n\n${carrito.join(`\n`)}`);
+if (consultaEliminar == "s") {
+  let pos = parseInt(prompt(`Escriba la posición del elemento que quiere eliminar \n${carrito.join(`\n`)}`));
+  eliminarVideojuego(pos);
+  alert(carrito.join(`\n`));
+} else if (consultaEliminar == "n") {
+  alert(`Su carrito: \n${carrito.join(`\n`)}`);
+}
