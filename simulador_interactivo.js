@@ -5,8 +5,9 @@ class Videojuego {
     this.nombre = nombre;
     this.genero = genero;
     this.precio = precio;
+  }
+  mostrarInfo() {
     this.info = `El nombre del juego es ${this.nombre}, su género es ${this.genero} y su valor es $${this.precio}`;
-    this.resumen = ``;
   }
 }
 
@@ -47,7 +48,7 @@ let listaNombres = `
 5) No
 `;
 
-let carrito = "";
+let carrito = [];
 let precioCarrito = 0;
 let continuar;
 let continuarLista;
@@ -85,22 +86,22 @@ function mostrarLista() {
   switch (solicitud) {
     case 1:
       alert(`Elegiste ${juego1.nombre}`);
-      carrito += juego1.nombre + "\n";
+      carrito.push(juego1.nombre);
       precioCarrito += juego1.precio;
       break;
     case 2:
       alert(`Elegiste ${juego2.nombre}`);
-      carrito += juego2.nombre + "\n";
+      carrito.push(juego2.nombre);
       precioCarrito += juego2.precio;
       break;
     case 3:
       alert(`Elegiste ${juego3.nombre}`);
-      carrito += juego3.nombre + "\n";
+      carrito.push(juego3.nombre);
       precioCarrito += juego3.precio;
       break;
     case 4:
       alert(`Elegiste ${juego4.nombre}`);
-      carrito += juego4.nombre + "\n";
+      carrito.push(juego4.nombre);
       precioCarrito += juego4.precio;
       break;
     default:
@@ -128,7 +129,9 @@ while (i < 5) {
       mostrarLista();
     } else if (continuar == "n") {
       alert(
-        `Seleccionó estos productos \n ${carrito}Su valor es $${precioCarrito}`
+        `Seleccionó estos productos \n ${carrito.join(
+          ", "
+        )} \nSu valor es $${precioCarrito}`
       );
       break;
     } else {
@@ -138,7 +141,10 @@ while (i < 5) {
   i++;
   if (i == 5) {
     alert(
-      `Seleccionó estos productos\n${carrito} Su valor es $${precioCarrito}`
+      `Seleccionó estos productos\n${carrito.join(
+        ", "
+      )}\nSu valor es $${precioCarrito}`
     );
   }
 }
+alert(`Su carrito es: ${carrito.join(", ")}\n Desea eliminar un producto?`);
