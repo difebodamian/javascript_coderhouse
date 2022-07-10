@@ -1,19 +1,15 @@
-class Videojuego {
-  constructor(nombre, genero, precio) {
-    this.nombre = nombre;
-    this.genero = genero;
-    this.precio = precio;
-  }
-  mostrarInfo() {
-    this.info = `El nombre del juego es ${this.nombre}, su género es ${this.genero} y su valor es $${this.precio}`;
-  }
+const catalogo = [
+  {nombre: "Resident Evil Village", genero: "terror", valor: 60},
+  {nombre: "GTA V", genero: "acción - mundo abierto", valor: 15},
+  {nombre: "Assassin's Creed Origins", genero: "acción - mundo abierto", valor: 30},
+  {nombre: "The Sims 4", genero: "simulación", valor: 5},
+  {nombre: "Cyberpunk 2077", genero: "fps - mundo abierto", valor: 70}
+]
+
+function mostrarCatalogo() {
+  let resultado = catalogo.forEach((producto, indice) => `${indice}: ${producto}`)
+  return resultado;
 }
-//Creación de objetos
-const juego1 = new Videojuego("Resident Evil Village", "Terror", 60);
-const juego2 = new Videojuego("GTA V", "Acción - Mundo Abierto", 15);
-const juego3 = new Videojuego("Assassin's Creed Origins", "Acción", 30);
-const juego4 = new Videojuego("The Sims 4", "Simulación", 5);
-const juego5 = new Videojuego("Cyberpunk 2077", "Acción", 70);
 
 function agregarVideojuego(name) {
   carrito.push(name);
@@ -27,21 +23,14 @@ function eliminarVideojuego(pos) {
   pos -= 1;
   carrito.splice(pos, 1);
 }
-let catalogo = [
-  juego1.nombre,
-  juego2.nombre,
-  juego3.nombre,
-  juego4.nombre,
-  juego5.nombre,
-];
-
 let carrito = [];
 let continuar = true;
 let agregar;
 let consultaEliminar;
 // Un ciclo que se repite siempre que el usuario quiera seguir eligiendo juegos
 while (continuar == true) {
-  agregar = prompt(`Ingrese la inicial del juego que quiere agregar a su carrito \n${catalogo.join(`\n`)}`);
+  mostrarCatalogo()
+  agregar = prompt(`Ingrese la inicial del juego que quiere agregar a su carrito \n${mostrarCatalogo()}`);
   switch (agregar) {
     case "r":
       agregarVideojuego(juego1.nombre);
