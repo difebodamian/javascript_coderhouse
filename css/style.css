@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
+* {
+    font-family: monospace;
+    font-size: 20px;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    justify-items: center;
+    grid-gap: 0;
+}
+h1 {
+    text-align: center;
+}
+p {
+    padding: 0 20px;
+}
+.card {
+    border: 3px solid #000;
+    text-align: center;
+    margin: 10px;
+}
+.border--red {
+    border: 3px solid red;
+}
+.button {
+    margin: 0 0 20px;
+}
