@@ -46,6 +46,23 @@ generos[1].textContent = juego2.genero;
 generos[2].textContent = juego3.genero;
 generos[3].textContent = juego4.genero;
 
+const nav = document.querySelector("#nav");
+const div = document.createElement("div");
+nav.appendChild(div);
+let navMouseOn = nav.addEventListener("mouseover", (e) => {
+    console.log("El mouse está dentro del nav");
+    nav.addEventListener("click", (e) => {
+        nav.lastChild.classList.add("cart--appears");
+    })
+})
+
+
+
+
+
+
+
+
 // VARIABLES Y CONSTANTES
 
 const carrito = [];
@@ -154,24 +171,24 @@ function pedirDatoUsuario() {
     }
 }
 // FLUJO DEL PROGRAMA
-do {
-    seleccionarProducto(pedirDatoUsuario());
-    seguir = confirm("Quiere seguir eligiendo juegos?")
-} while (seguir)
+// do {
+//     seleccionarProducto(pedirDatoUsuario());
+//     seguir = confirm("Quiere seguir eligiendo juegos?")
+// } while (seguir)
 
-mostrarCarrito()
-calcularTotalCarrito()
+// mostrarCarrito()
+// calcularTotalCarrito()
 
-if (preguntaEliminar() == "s") {
-    do {
-        pregunta = parseInt(prompt("Ponga el número del juego que desea eliminar, en orden numérico"));
-        eliminarDelCarrito(pregunta);
-        mostrarCarrito();
-        seguirEliminando = confirm("Desea eliminar otro juego?")
-    } while (seguirEliminando);
-    pagarEnCuotas()
-} else {
-    mostrarCarrito();
-    calcularTotalCarrito();
-    pagarEnCuotas();
-}
+// if (preguntaEliminar() == "s") {
+//     do {
+//         pregunta = parseInt(prompt("Ponga el número del juego que desea eliminar, en orden numérico"));
+//         eliminarDelCarrito(pregunta);
+//         mostrarCarrito();
+//         seguirEliminando = confirm("Desea eliminar otro juego?")
+//     } while (seguirEliminando);
+//     pagarEnCuotas()
+// } else {
+//     mostrarCarrito();
+//     calcularTotalCarrito();
+//     pagarEnCuotas();
+// }
