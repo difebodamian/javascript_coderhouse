@@ -36,15 +36,9 @@ span {
 .none {
     display: none;
 }
-.cart {
-    text-align: center;
-}
-.cart--appears {
+.cart-style {
     display: block;
-    position: absolute;
-    border: 2px solid #000;
-    width: 400px;
-    height: 200px;
-    left: 600px;
-    top: 50px;
+    width: 80%;
+    margin: 10% 5%;
+    border: 2px solid blue;
 }

@@ -1,65 +1,123 @@
 /*
-Agregar la funcionalidad de agregar al carrito LISTO
-Agregar más juegos
-Poder ver el carrito LISTO
-Poder ver el precio final del carrito LISTO 
-Poder eliminar un juego del carrito si quiero LISTO
+Agregar la funcionalidad de agregar al carrito
+Poder ver el carrito 
+Poder ver el precio final del carrito  
+Poder eliminar un game del carrito si quiero 
 Darle la posibilidad al usuario de pagar en cuotas
+Agregar la funcionalidad de que cuando aprete el botón de "add to cart" se agregue al array del carrito
+Que cuando agregue un objeto al carrito este se muestre en pantalla
+Agregar una cruz roja para eliminar game (en el carrito)
+Que cuando toque esa cruz roja el game se elimine del carrito
+Agregar un botón en el nav para cambiar los precios de los games a dólares o pesos
+Que se sumen los totales de los precios al carrito
+Mostrar el price final del carrito
 */
+
+//Agregar funcionalidad de agregar el precio en pesos
 
 // OBJETOS
 
-class Videojuego {
-    constructor(id, nombre, genero, valor) {
+class Game {
+    constructor(id, name, category, price) {
         this.id = id;
-        this.nombre = nombre;
-        this.genero = genero;
-        this.valor = valor;
+        this.name = name;
+        this.category = category;
+        this.price = price;
     }
 }
 
-const juego1 = new Videojuego(0, "resident evil village", "terror", 60);
-const juego2 = new Videojuego(1, "gta v", "mundo abierto", 20);
-const juego3 = new Videojuego(2, "assassin's creed origins", "mundo abierto", 30);
-const juego4 = new Videojuego(3, "the sims 4", "simulación", 15);
-
-const cards = document.querySelectorAll(".card");
-const titles = document.querySelectorAll(".title");
-const precios = document.querySelectorAll(".precio");
-const generos = document.querySelectorAll(".genero");
-const buttons = document.querySelectorAll(".button")
-const span = document.querySelectorAll("span");
+const game1 = new Game(0, "Resident Evil Village", "Horror", 4299);
+const game2 = new Game(1, "Gta V", "Action - Open World", 1199);
+const game3 = new Game(2, "Assasin's Creed Origins", "Action - Open World", 5299);
+const game4 = new Game(3, "The Sims 4", "Simulation", 3599);
+const game5 = new Game(4, "Battlefield 2042", "FPS - Action", 111899)
+const game6 = new Game(5, "Elden Ring", "Open World - Souls Style", 6899)
+const game7 = new Game(6, "Dying Light 2: Stay Human", "Zombies - Action", 5199)
+const game8 = new Game(7, "The Quarry", "Drama", 5999);
 
 
-titles[0].textContent = juego1.nombre;
-titles[1].textContent = juego2.nombre;
-titles[2].textContent = juego3.nombre;
-titles[3].textContent = juego4.nombre;
-
-precios[0].textContent = "$" + juego1.valor;
-precios[1].textContent = "$" + juego2.valor;
-precios[2].textContent = "$" + juego3.valor;
-precios[3].textContent = "$" + juego4.valor;
-
-generos[0].textContent = juego1.genero;
-generos[1].textContent = juego2.genero;
-generos[2].textContent = juego3.genero;
-generos[3].textContent = juego4.genero;
+const buttons = document.querySelectorAll(".button");
+const main = document.querySelector("#main");
+const games = document.querySelector(".games");
+const formContainer = document.querySelector(".form-container");
+const cart = document.querySelector(".cart")
 
 const nav = document.querySelector("#nav");
 const div = document.createElement("div");
-nav.appendChild(div);
-let navMouseOn = nav.addEventListener("mouseover", (e) => {
-    console.log("El mouse está dentro del nav");
-    nav.addEventListener("click", (e) => {
-        nav.lastChild.classList.add("cart--appears");
-    })
+const div2 = document.createElement("div");
+
+buttons[0].addEventListener("click", (e) => {
+    newGameToCart(game1)
+})
+buttons[1].addEventListener("click", (e) => {
+    addGame(game2)
+})
+buttons[2].addEventListener("click", (e) => {
+    addGame(game3)
+})
+buttons[3].addEventListener("click", (e) => {
+    addGame(game4)
+})
+buttons[4].addEventListener("click", (e) => {
+    addGame(game5)
+})
+buttons[5].addEventListener("click", (e) => {
+    addGame(game6)
+})
+buttons[6].addEventListener("click", (e) => {
+    addGame(game7)
+})
+buttons[7].addEventListener("click", (e) => {
+    newGameToCart(game8)
 })
 
 
+function cartAppears() {
+    cart.classList.add("cart-style")
+}
+cartAppears();
 
 
 
+function createNewDiv() {
+    return newDiv = cart.appendChild(div);
+}
+
+function newDivClass() {
+    newDiv.classList.add(game1.id)
+}
+
+function newDivElements(element) {
+    const name = document.createElement("h6");
+    const price = document.createElement("span");
+    const category = document.createElement("span");
+    const id = document.createElement("span");
+    element.appendChild(name);
+    name.classList.add("name")
+    element.appendChild(price);
+    price.classList.add("price")
+    element.appendChild(category);
+    category.classList.add("category")
+    element.appendChild(id);
+    id.classList.add("id")
+}
+
+function addGame(element) {
+    let name = document.querySelector(".name");
+    name.innerText = element.name;
+    let price = document.querySelector(".price");
+    price.innerText = element.price;
+    let category = document.querySelector(".category");
+    category.innerText = element.category;
+    let id = document.querySelector(".id");
+    id.innerText = element.id;
+}
+function newGameToCart(element) {
+    let gameDiv = createNewDiv();
+    newDivClass(gameDiv)
+    newDivElements(gameDiv)
+    addGame(element)
+}
 
 
 
@@ -95,7 +153,7 @@ function opcionesDeCuotas() {
 
 function calculoCuotas() {
     pregunta = opcionesDeCuotas();
-    total = carrito.reduce((acc, element) => acc += element.valor, 0);
+    total = carrito.reduce((acc, element) => acc += element.price, 0);
     switch (pregunta) {
         case 3:
             recargo = total * 0.05;
@@ -118,7 +176,7 @@ function calculoCuotas() {
             total /= 12;
             return alert(`Vas a pagar 12 cuotas de $${total}`);
         default:
-            alert("Seleccione un valor válido");
+            alert("Seleccione un price válido");
     }
 }
 
@@ -132,48 +190,48 @@ function agregarAlCarrito(element) {
 }
 
 function mostrarCarrito() {
-    carrito.map(element => alert(`${element.nombre} está en tu carrito, vale $${element.valor}`));
+    carrito.map(element => alert(`${element.name} está en tu carrito, vale $${element.price}`));
 }
 
 function calcularTotalCarrito() {
-    alert("El valor de tu carrito es $" + carrito.reduce((acc, element) => acc += element.valor, 0));
+    alert("El price de tu carrito es $" + carrito.reduce((acc, element) => acc += element.price, 0));
 }
 
 function preguntaEliminar() {
-    return prompt("Quiere eliminar un juego? s/n");
+    return prompt("Quiere eliminar un game? s/n");
 }
 
 function eliminarDelCarrito(elementPosition) {
     posicion = elementPosition -= 1;
-    alert(`Eliminaste ${carrito[posicion].nombre}`)
+    alert(`Eliminaste ${carrito[posicion].name}`)
     carrito.splice((posicion), 1);
 }
 
 function pedirDatoUsuario() {
-    let entrada = parseInt(prompt("Qué juego desea seleccionar? 1 al 4"));
+    let entrada = parseInt(prompt("Qué game desea seleccionar? 1 al 4"));
     if (entrada < 5) {
         switch (entrada) {
             case 1:
-                carrito.push(juego1);
+                carrito.push(game1);
                 return entrada;
             case 2:
-                carrito.push(juego2);
+                carrito.push(game2);
                 return entrada;
             case 3:
-                carrito.push(juego3);
+                carrito.push(game3);
                 return entrada;
             case 4:
-                carrito.push(juego4);
+                carrito.push(game4);
                 return entrada;
         }
     } else {
-        alert("ingrese un valor válido")
+        alert("ingrese un price válido")
     }
 }
 // FLUJO DEL PROGRAMA
 // do {
 //     seleccionarProducto(pedirDatoUsuario());
-//     seguir = confirm("Quiere seguir eligiendo juegos?")
+//     seguir = confirm("Quiere seguir eligiendo games?")
 // } while (seguir)
 
 // mostrarCarrito()
@@ -181,10 +239,10 @@ function pedirDatoUsuario() {
 
 // if (preguntaEliminar() == "s") {
 //     do {
-//         pregunta = parseInt(prompt("Ponga el número del juego que desea eliminar, en orden numérico"));
+//         pregunta = parseInt(prompt("Ponga el número del game que desea eliminar, en orden numérico"));
 //         eliminarDelCarrito(pregunta);
 //         mostrarCarrito();
-//         seguirEliminando = confirm("Desea eliminar otro juego?")
+//         seguirEliminando = confirm("Desea eliminar otro game?")
 //     } while (seguirEliminando);
 //     pagarEnCuotas()
 // } else {
